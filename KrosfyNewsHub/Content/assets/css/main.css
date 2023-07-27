@@ -9,6 +9,7 @@
 /**
 * Check out variables.css for easy customization of colors, typography, and other repetitive properties
 */
+
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
@@ -139,10 +140,10 @@ section {
   height: 70px;
 }
 
-.header .logo img {
-  max-height: 40px;
-  margin-right: 6px;
-}
+ .header .logo img {
+    height: 50px;
+    margin-right: 6px;
+ }
 
 .header .logo h1 {
   font-size: 30px;
@@ -1298,4 +1299,13 @@ section {
 
 .footer .credits a {
   color: var(--color-white);
+}
+
+/*--------------------------------------------------------------
+# Modificaciones
+--------------------------------------------------------------*/
+
+.header .logo img {
+    max-height: 50px;
+    margin-right: 6px;
 }

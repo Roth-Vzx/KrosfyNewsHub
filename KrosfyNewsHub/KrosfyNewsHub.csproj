@@ -139,6 +139,7 @@
     <Content Include="Content\assets\css\variables.css" />
     <Content Include="Content\assets\img\apple-touch-icon.png" />
     <Content Include="Content\assets\img\favicon.png" />
+    <Content Include="Content\assets\img\logo-kn.png" />
     <Content Include="Content\assets\img\logo.png" />
     <Content Include="Content\assets\img\person-1.jpg" />
     <Content Include="Content\assets\img\person-2.jpg" />
