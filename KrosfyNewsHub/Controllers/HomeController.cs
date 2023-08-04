@@ -26,5 +26,13 @@ namespace KrosfyNewsHub.Controllers
 
             return View();
         }
+
+        public ActionResult Category()
+        {
+            ViewBag.Message = "Category View";
+
+            return View();
+        }
+
     }
 }

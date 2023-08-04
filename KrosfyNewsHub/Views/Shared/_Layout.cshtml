@@ -23,7 +23,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Inter:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
-    @Styles.Render("~/Content/css");
+    @Styles.Render("~/Content/css")
 
     <!-- =======================================================
     * Template Name: ZenBlog
@@ -36,114 +36,146 @@
 
 <body>
 
-    <header id="header" class="header d-flex align-items-center fixed-top">
-        <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="~/Content/assets/img/logo-kn.png" alt="logo" width="90">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse text-center" id="navbarTogglerDemo01">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Resultados de Busqueda</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Category", "Home",new { type = "bitcoin" })">Bitcoin</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Category", "Home",new { type = "ethereum" })">Ethereum</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Category", "Home",new { type = "tether" })">Tether</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Category", "Home",new { type = "cardano" })">Cardano</a>
+                        </li>
+                    </ul>
 
-            <a href="Index" class="logo d-flex align-items-center">
-                <!-- Uncomment the line below if you also wish to use an image logo -->
-                <img src="~/Content/assets/img/logo-kn.png" alt="logo">
-            </a>
+                    @* Submenu de lenguaje.*@
 
-            <nav id="navbar" class="navbar">
-                <ul>
-                    <li class="dropdown">
-                        <span>Categorias</span> <i class="bi bi-chevron-down dropdown-indicator"></i>
-                        <ul>
-                            <li><a href="search-result.html">Resultados de Busqueda</a></li>
-                            <li><a href="#">Bitcoin</a></li>
-                            <li><a href="#">Ethereum</a></li>
-                            <li><a href="#">Tether</a></li>
-                            <li><a href="#">Cardano</a></li>
+                    @{
+                        var context = new KrosfyNewsHub.ContextExtensions();
+                        var userAgent = HttpContext.Current.Request.UserAgent;
+                        bool isMobileDevice = context.isRequestFromMobile(userAgent);
+                    }
+
+                    @if (!isMobileDevice)
+                    {
+                        <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="bi bi-translate"></i> @*@Resources.Resources.LangText</a>*@
+                                    <div class="dropdown-menu bg-light border-bottom border-bottom" aria-labelledby="navbarDropdown">
+
+                                        <a class="nav-link dropdown-item" href="@Url.Action("ChangeLanguage", "Language",new { lang = "es" })">
+                                            <img width="20" height="20" src="https://img.icons8.com/color/48/spain-circular.png" alt="spain-circular" /> @*@Resources.Resources.LangES*@
+                                        </a>
+                                        <a class="nav-link dropdown-item" href="@Url.Action("ChangeLanguage", "Language",new { lang = "it" })">
+                                            <img width="20" height="20" src="https://img.icons8.com/fluency/48/italy-circular.png" alt="italy-circular" /> @*@Resources.Resources.LangIT*@
+                                        </a>
+                                        <a class="nav-link dropdown-item" href="@Url.Action("ChangeLanguage", "Language",new { lang = "en" })">
+                                            <img width="20" height="20" src="https://img.icons8.com/fluency/48/usa-circular.png" alt="usa-circular" style="display:inline-flex" /> @*@Resources.Resources.LangEN*@
+                                        </a>
+                                    </div>
+                            </li>
                         </ul>
-                    </li>
-                </ul>
-            </nav><!-- .navbar -->
+                    }
+                    else
+                    {
+                        <div class="LanguagesMobile">
+                            @*<p>@Resources.Resources.LangText: </p>*@
+                            <a class="nav-link img-mobile" href="@Url.Action("ChangeLanguage", "Language",new { lang = "es" })">
+                                <img width="20" height="20" src="https://img.icons8.com/color/48/spain-circular.png" alt="spain-circular" />
+                            </a>
+                            <a class="nav-link img-mobile" href="@Url.Action("ChangeLanguage", "Language",new { lang = "it" })">
+                                <img width="20" height="20" src="https://img.icons8.com/fluency/48/italy-circular.png" alt="italy-circular" />
+                            </a>
+                            <a class="nav-link img-mobile" href="@Url.Action("ChangeLanguage", "Language",new { lang = "en" })">
+                                <img width="20" height="20" src="https://img.icons8.com/fluency/48/usa-circular.png" alt="usa-circular" style="display:inline-flex" />
+                            </a>
+                        </div>
 
-            <div class="position-relative">
-                <a href="#" class="mx-2 js-search-open"><span class="bi-search"></span></a>
-                <i class="bi bi-list mobile-nav-toggle"></i>
+                    }
 
-                <!-- ======= Search Form ======= -->
-                <div class="search-form-wrap js-search-form-wrap">
-                    <form action="search-result.html" class="search-form">
-                        <span class="icon bi-search"></span>
-                        <input type="text" placeholder="Search" class="form-control">
-                        <button class="btn js-search-close"><span class="bi-x"></span></button>
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
-                </div><!-- End Search Form -->
-
+                </div>
             </div>
+        </nav>
+    </header>
 
+    <!--<header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl d-flex align-items-center justify-content-between">-->
+
+            
+
+            <!--<nav id="navbar" class="navbar navbar-expand-lg fixed-top">-->
+            <!--<a href="Index" class="logo d-flex align-items-center">-->
+            <!-- Uncomment the line below if you also wish to use an image logo -->
+            <!--<img src="~/Content/assets/img/logo-kn.png" alt="logo">
+    </a>-->
+            <!--<a class="navbar-brand" href="#">
+            <img src="~/Content/assets/img/logo-kn.png" alt="logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarresponsive">
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarresponsive">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <span>Categorias</span> <i class="bi bi-chevron-down dropdown-indicator"></i>
+                    <ul>
+                        <li><a href="search-result.html">Resultados de Busqueda</a></li>
+                        <li><a href="#">Bitcoin</a></li>
+                        <li><a href="#">Ethereum</a></li>
+                        <li><a href="#">Tether</a></li>
+                        <li><a href="#">Cardano</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
 
-    </header><!-- End Header -->
+    </nav>-->
+            <!-- .navbar -->
+            <!--<div class="position-relative">
+        <a href="#" class="mx-2 js-search-open"><span class="bi-search"></span></a>
+        <i class="bi bi-list mobile-nav-toggle"></i>-->
+            <!-- ======= Search Form ======= -->
+            <!--<div class="search-form-wrap js-search-form-wrap">
+        <form action="search-result.html" class="search-form">
+            <span class="icon bi-search"></span>
+            <input type="text" placeholder="Search" class="form-control">
+            <button class="btn js-search-close"><span class="bi-x"></span></button>
+        </form>
+    </div>-->
+            <!-- End Search Form -->
+            <!--</div>-->
+
+        <!--</div>
+
+    </header>--><!-- End Header -->
 
     <div class="container-noborder body-content">
 
         @RenderBody()
 
         <footer id="footer" class="footer">
-
-            <div class="footer-content">
-                <div class="container-fluid">
-
-                    <div class="row g-5">
-                        <div class="col-lg-4">
-                            <h3 class="footer-heading">Sobre Nosotros</h3>
-                            <p>Somos un pequeño grupo de estudiantes que se quiere ir a italia XD</p>
-                        </div>
-
-                        <div class="col-lg-4">
-                            <h3 class="footer-heading">Recent Posts</h3>
-
-                            <ul class="footer-links footer-blog-entry list-unstyled">
-                                <li>
-                                    <a href="single-post.html" class="d-flex align-items-center">
-                                        <img src="assets/img/post-sq-1.jpg" alt="" class="img-fluid me-3">
-                                        <div>
-                                            <div class="post-meta d-block"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
-                                            <span>5 Great Startup Tips for Female Founders</span>
-                                        </div>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="single-post.html" class="d-flex align-items-center">
-                                        <img src="assets/img/post-sq-2.jpg" alt="" class="img-fluid me-3">
-                                        <div>
-                                            <div class="post-meta d-block"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
-                                            <span>What is the son of Football Coach John Gruden, Deuce Gruden doing Now?</span>
-                                        </div>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="single-post.html" class="d-flex align-items-center">
-                                        <img src="assets/img/post-sq-3.jpg" alt="" class="img-fluid me-3">
-                                        <div>
-                                            <div class="post-meta d-block"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
-                                            <span>Life Insurance And Pregnancy: A Working Mom’s Guide</span>
-                                        </div>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a href="single-post.html" class="d-flex align-items-center">
-                                        <img src="assets/img/post-sq-4.jpg" alt="" class="img-fluid me-3">
-                                        <div>
-                                            <div class="post-meta d-block"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
-                                            <span>How to Avoid Distraction and Stay Focused During Video Calls?</span>
-                                        </div>
-                                    </a>
-                                </li>
-
-                            </ul>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div class="footer-legal">
                 <div class="container">
 
