@@ -1,0 +1,5 @@
+﻿https://rapidapi.com/machaao-inc-machaao-inc-default/api/newsx/pricing
+
+https://rapidapi.com/caddytzitzy/api/newsomaticapi
+
+https://gnews.io/docs/v4#query-syntax

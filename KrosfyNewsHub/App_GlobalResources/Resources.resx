@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Category_TitleText" xml:space="preserve">
+    <value>Categoria</value>
+  </data>
+  <data name="Home_SeeAllText" xml:space="preserve">
+    <value>Ver todo</value>
+  </data>
   <data name="LangEN" xml:space="preserve">
     <value>Ingles</value>
   </data>
@@ -129,7 +135,19 @@
   <data name="LangText" xml:space="preserve">
     <value>Idioma</value>
   </data>
+  <data name="Menu_AllText" xml:space="preserve">
+    <value>Todas</value>
+  </data>
+  <data name="Menu_Crypto" xml:space="preserve">
+    <value>Cripto Monedas</value>
+  </data>
   <data name="Menu_HomeBtn" xml:space="preserve">
     <value>Inicio</value>
+  </data>
+  <data name="Menu_SearchText" xml:space="preserve">
+    <value>Buscar</value>
+  </data>
+  <data name="Menu_Technology" xml:space="preserve">
+    <value>Tecnología</value>
   </data>
 </root>

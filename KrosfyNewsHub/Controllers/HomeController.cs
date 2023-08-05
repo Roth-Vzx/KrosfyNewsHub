@@ -1,63 +1,56 @@
 ﻿using KrosfyNewsHub.Models;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.IO;
-using System.Runtime.Remoting.Contexts;
+using KrosfyNewsHub.Extensions;
+using System.Text;
 
 namespace KrosfyNewsHub.Controllers
 {
     public class HomeController : Controller
     {
-        
         List<Article> BitcoinNews = new List<Article>();
         List<Article> EthereumNews = new List<Article>();
         List<Article> TetherNews = new List<Article>();
         List<Article> CardanaNews = new List<Article>();
-        List<(List<Article> articulos, string nombre)> _AllNews = new List<(List<Article> articulos, string nombre)>();
+        List<(List<Article> articulos, int CategoriaID, int SubCategoriaID)> _AllNews = new List<(List<Article> articulos, int CategoriaID, int SubCategoriaID)>();
+
         public ActionResult Index()
         {
-            
-            LoadData(ref BitcoinNews, ref EthereumNews, ref TetherNews, ref CardanaNews, true);
-
-            _AllNews.Add((BitcoinNews, "Bitcoin"));
-            _AllNews.Add((EthereumNews, "Ethereum"));
-            _AllNews.Add((TetherNews, "Tether"));
-            _AllNews.Add((CardanaNews, "Cardana"));
-
+            LoadData(true);
             ViewBag.News = _AllNews;
             return View();
         }
 
-        public void LoadData(ref List<Article> BitcoinNews, ref List<Article> EthereumNews, ref List<Article> TetherNews, ref List<Article> CardanaNews, bool filterIndex)
+        public ActionResult IndexFiltered()
         {
-            string rutaArchivoJson = Server.MapPath("~/Content/data/bitcoin.json");
-            string contenidoJson = System.IO.File.ReadAllText(rutaArchivoJson);
-            BitcoinNews = JsonConvert.DeserializeObject<RequestNews>(contenidoJson).articles;
-            if (filterIndex) { LastSevenArticles(ref BitcoinNews); };
-
-            rutaArchivoJson = Server.MapPath("~/Content/data/etherium.json");
-            contenidoJson = System.IO.File.ReadAllText(rutaArchivoJson);
-            EthereumNews = JsonConvert.DeserializeObject<RequestNews>(contenidoJson).articles;
-            if (filterIndex) { LastSevenArticles(ref EthereumNews); };
-
-            rutaArchivoJson = Server.MapPath("~/Content/data/tether.json");
-            contenidoJson = System.IO.File.ReadAllText(rutaArchivoJson);
-            TetherNews = JsonConvert.DeserializeObject<RequestNews>(contenidoJson).articles;
-            if (filterIndex) { LastSevenArticles(ref TetherNews); };
-
-            rutaArchivoJson = Server.MapPath("~/Content/data/cardano.json");
-            contenidoJson = System.IO.File.ReadAllText(rutaArchivoJson);
-            CardanaNews = JsonConvert.DeserializeObject<RequestNews>(contenidoJson).articles;
-            if (filterIndex) { LastSevenArticles(ref CardanaNews); };
+            LoadData(true);
+            ViewBag.News = _AllNews;
+            return View();
         }
 
-        public void LastSevenArticles(ref List<Article> lista)
+
+        public void LoadData(bool filterIndex=false, int filterCategory = 0, int filterSubCategory = 0)
         {
-            lista = lista.Take(7).ToList();
+            string rutaArchivoJson = Server.MapPath("~/Content/data/News.json");
+            byte[] bytes = Encoding.UTF8.GetBytes(System.IO.File.ReadAllText(rutaArchivoJson));
+            string contenidoJson = Encoding.UTF8.GetString(bytes);
+            var news = JsonConvert.DeserializeObject<RequestNews>(contenidoJson);
+            
+            foreach (var subcategoria in news.News) {
+                if(filterCategory != 0 && filterCategory != subcategoria.category) { continue; }
+                if (filterSubCategory != 0 && filterSubCategory != subcategoria.subcategory) { continue; }
+                string CategoryName = ""; string SubCategoryName = "";
+                List<Article> SubCategoryNews = filterIndex ? LastArticles(subcategoria.content.articles) : subcategoria.content.articles;
+                _AllNews.Add((SubCategoryNews, subcategoria.category, subcategoria.subcategory));
+            }
+           
+        }
+
+        public List<Article> LastArticles(List<Article> lista)
+        {
+            return (lista.Take(8).ToList());
         }
 
         public ActionResult SearchResult()
@@ -66,22 +59,19 @@ namespace KrosfyNewsHub.Controllers
             return View();
         }
 
-        public ActionResult SinglePost()
+        public ActionResult SinglePost(int idPost)
         {
             ViewBag.Message = "Your contact page.";
             return View();
         }
 
-        public ActionResult Category(string type)
+        public ActionResult Category(int categoriaID, int SubCategoriaID)
         {
-            type = type.ToUpper(); 
-            LoadData(ref BitcoinNews, ref EthereumNews, ref TetherNews, ref CardanaNews, false); 
-            ViewBag.Message = type;
             
-            if(type == "BITCOIN")
-            {
-                ViewBag.Noticias = BitcoinNews;
-            }
+            LoadData(false,0, SubCategoriaID); 
+            ViewBag.Category = NewsExtensions.GetCategoryName(categoriaID).ToUpper();
+            ViewBag.Subcategory = NewsExtensions.GetSubCategoryName(SubCategoriaID).ToUpper();
+            ViewBag.News = _AllNews;
 
             return View();
         }

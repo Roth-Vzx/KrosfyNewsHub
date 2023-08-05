@@ -5,14 +5,6 @@ using System.Web;
 
 namespace KrosfyNewsHub.Models
 {
-    public class RequestNews
-    {
-            public string status { get; set; }
-            public int totalResults { get; set; }
-            public List<Article> articles { get; set; }
-       
-    }
-
     public class Article
     {
         public Source source { get; set; }
@@ -25,6 +17,24 @@ namespace KrosfyNewsHub.Models
         public string content { get; set; }
     }
 
+    public class Content
+    {
+        public string status { get; set; }
+        public int totalResults { get; set; }
+        public List<Article> articles { get; set; }
+    }
+
+    public class News
+    {
+        public int subcategory { get; set; }
+        public int category { get; set; }
+        public Content content { get; set; }
+    }
+
+    public class RequestNews
+    {
+        public List<News> News { get; set; }
+    }
 
     public class Source
     {

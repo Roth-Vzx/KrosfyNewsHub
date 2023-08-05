@@ -61,6 +61,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a Categoria.
+        /// </summary>
+        internal static string Category_TitleText {
+            get {
+                return ResourceManager.GetString("Category_TitleText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Ver todo.
+        /// </summary>
+        internal static string Home_SeeAllText {
+            get {
+                return ResourceManager.GetString("Home_SeeAllText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a Ingles.
         /// </summary>
         internal static string LangEN {
@@ -97,11 +115,47 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a Todas.
+        /// </summary>
+        internal static string Menu_AllText {
+            get {
+                return ResourceManager.GetString("Menu_AllText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Cripto Monedas.
+        /// </summary>
+        internal static string Menu_Crypto {
+            get {
+                return ResourceManager.GetString("Menu_Crypto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a Inicio.
         /// </summary>
         internal static string Menu_HomeBtn {
             get {
                 return ResourceManager.GetString("Menu_HomeBtn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Buscar.
+        /// </summary>
+        internal static string Menu_SearchText {
+            get {
+                return ResourceManager.GetString("Menu_SearchText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Tecnología.
+        /// </summary>
+        internal static string Menu_Technology {
+            get {
+                return ResourceManager.GetString("Menu_Technology", resourceCulture);
             }
         }
     }
