@@ -52,7 +52,7 @@
                                 Crypto @* <i class="bi bi-currency-bitcoin"></i>*@
                             </a>
                             <div class="dropdown-menu bg-light border-bottom border-bottom" aria-labelledby="CryptoDropdown">
-                                @Html.ActionLink(Resources.Resources.Menu_AllText, "IndexFiltered", "Home", new { area = "", type = 1 }, new { @class = "nav-link dropdown-item" })
+                                @Html.ActionLink(Resources.Resources.Menu_AllText, "Index", "Home", new { area = "", categoriaID = 1 }, new { @class = "nav-link dropdown-item" })
                                 @Html.ActionLink("Bitcoin", "Category", "Home", new { area = "", categoriaID = 1, SubCategoriaID = 1 }, new { @class = "nav-link dropdown-item" })
                                 @Html.ActionLink("Ethereum", "Category", "Home", new { area = "", categoriaID = 1, SubCategoriaID = 2 }, new { @class = "nav-link dropdown-item" })
                                 @Html.ActionLink("Tether", "Category", "Home", new { area = "", categoriaID = 1, SubCategoriaID = 3 }, new { @class = "nav-link dropdown-item" })
@@ -65,7 +65,7 @@
                                 Technology @* <i class="bi bi-currency-bitcoin"></i>*@
                             </a>
                             <div class="dropdown-menu bg-light border-bottom border-bottom" aria-labelledby="TechnologyDropdown">
-                                @Html.ActionLink(Resources.Resources.Menu_AllText, "IndexFiltered", "Home", new { area = "", type = 2 }, new { @class = "nav-link dropdown-item" })
+                                @Html.ActionLink(Resources.Resources.Menu_AllText, "Index", "Home", new { area = "", categoriaID = 2 }, new { @class = "nav-link dropdown-item" })
                                 @Html.ActionLink("Inteligencia Artificial", "Category", "Home", new { area = "", categoriaID = 2, SubCategoriaID = 5 }, new { @class = "nav-link dropdown-item" })
                                 @Html.ActionLink("Gaming News", "Category", "Home", new { area = "", categoriaID = 2, SubCategoriaID = 6 }, new { @class = "nav-link dropdown-item" })
 

@@ -16,16 +16,9 @@ namespace KrosfyNewsHub.Controllers
         List<Article> CardanaNews = new List<Article>();
         List<(List<Article> articulos, int CategoriaID, int SubCategoriaID)> _AllNews = new List<(List<Article> articulos, int CategoriaID, int SubCategoriaID)>();
 
-        public ActionResult Index()
+        public ActionResult Index(int categoriaID = 0)
         {
-            LoadData(true);
-            ViewBag.News = _AllNews;
-            return View();
-        }
-
-        public ActionResult IndexFiltered()
-        {
-            LoadData(true);
+            LoadData(true, categoriaID);
             ViewBag.News = _AllNews;
             return View();
         }
