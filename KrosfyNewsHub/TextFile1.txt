@@ -2,7 +2,7 @@
 
 https://rapidapi.com/caddytzitzy/api/newsomaticapi/pricing --- pago 10$/mes -> 1000 peticiones por dia, 5 por segundo
 
-https://rapidapi.com/microsoft-azure-org-microsoft-cognitive-services/api/bing-news-search1/pricing --- 1000 por mes -> 3 x seg
+https://rapidapi.com/microsoft-azure-org-microsoft-cognitive-services/api/bing-news-search1/pricing --- 1000 por mes -> 3 x seg - PARA TRENDINGS
 
 
 https://gnews.io/docs/v4#query-syntax   --- 10 peticiones por mes
