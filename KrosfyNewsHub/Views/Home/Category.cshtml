@@ -1,4 +1,5 @@
-﻿
+﻿@using KrosfyNewsHub.Extensions
+@using KrosfyNewsHub.Models
 @{
     ViewBag.Title = "Category";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -10,92 +11,33 @@
         <div class="row">
 
             <div class="col-md-9" data-aos="fade-up">
-                <h3 class="category-title">Category: Business</h3>
-
-                <div class="d-md-flex post-entry-2 half">
-                    <a href="single-post.html" class="me-4 thumbnail">
-                        <img src="~/Content/assets/img/post-landscape-6.jpg" alt="" class="img-fluid">
-                    </a>
-                    <div>
-                        <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
-                        <h3><a href="single-post.html">What is the son of Football Coach John Gruden, Deuce Gruden doing Now?</a></h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio placeat exercitationem magni voluptates dolore. Tenetur fugiat voluptates quas, nobis error deserunt aliquam temporibus sapiente, laudantium dolorum itaque libero eos deleniti?</p>
-                        <div class="d-flex align-items-center author">
-                            <div class="photo"><img src="~/Content/assets/img/person-2.jpg" alt="" class="img-fluid"></div>
-                            <div class="name">
-                                <h3 class="m-0 p-0">Wade Warren</h3>
+                <h3 class="category-title">@Resources.Resources.Category_TitleText: @ViewBag.Category -> @ViewBag.Subcategory </h3>
+                @foreach ((List<Article> articulos, int IDCategoria, int IDSubCategoria) categoria in ViewBag.News)
+                {
+                    foreach (Article noticia in categoria.articulos.Take(100))
+                    {
+                        <div class="d-md-flex post-entry-2 half">
+                            <a href="@Url.Action("SinglePost","Home", new { area = "", idPost = 0 })" class="me-4 thumbnail">
+                                <img src="@noticia.urlToImage" alt="" class="img-fluid">
+                            </a>
+                            <div>
+                                <div class="post-meta"><span class="date">@ViewBag.Subcategory</span> <span class="mx-1">&bullet;</span> <span>@noticia.publishedAt.ToString("dd-MM-yyyy")</span></div>
+                                <h3><a href="@Url.Action("SinglePost","Home", new { area = "", idPost = 0 })">@noticia.title</a></h3>
+                                <p>@noticia.description</p>
+                                <div class="d-flex align-items-center author">
+                                    <div class="photo"><img src="~/Content/assets/img/person-2.jpg" alt="" class="img-fluid"></div>
+                                    <div class="name">
+                                        <h3 class="m-0 p-0">@noticia.author</h3>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    }
 
-                <div class="d-md-flex post-entry-2 half">
-                    <a href="single-post.html" class="me-4 thumbnail">
-                        <img src="~/Content/assets/img/post-landscape-1.jpg" alt="" class="img-fluid">
-                    </a>
-                    <div>
-                        <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
-                        <h3><a href="single-post.html">What is the son of Football Coach John Gruden, Deuce Gruden doing Now?</a></h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio placeat exercitationem magni voluptates dolore. Tenetur fugiat voluptates quas, nobis error deserunt aliquam temporibus sapiente, laudantium dolorum itaque libero eos deleniti?</p>
-                        <div class="d-flex align-items-center author">
-                            <div class="photo"><img src="~/Content/assets/img/person-2.jpg" alt="" class="img-fluid"></div>
-                            <div class="name">
-                                <h3 class="m-0 p-0">Wade Warren</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                }
 
-                <div class="d-md-flex post-entry-2 half">
-                    <a href="single-post.html" class="me-4 thumbnail">
-                        <img src="~/Content/assets/img/post-landscape-2.jpg" alt="" class="img-fluid">
-                    </a>
-                    <div>
-                        <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
-                        <h3><a href="single-post.html">What is the son of Football Coach John Gruden, Deuce Gruden doing Now?</a></h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio placeat exercitationem magni voluptates dolore. Tenetur fugiat voluptates quas, nobis error deserunt aliquam temporibus sapiente, laudantium dolorum itaque libero eos deleniti?</p>
-                        <div class="d-flex align-items-center author">
-                            <div class="photo"><img src="~/Content/assets/img/person-2.jpg" alt="" class="img-fluid"></div>
-                            <div class="name">
-                                <h3 class="m-0 p-0">Wade Warren</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="d-md-flex post-entry-2 half">
-                    <a href="single-post.html" class="me-4 thumbnail">
-                        <img src="~/Content/assets/img/post-landscape-3.jpg" alt="" class="img-fluid">
-                    </a>
-                    <div>
-                        <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
-                        <h3><a href="single-post.html">What is the son of Football Coach John Gruden, Deuce Gruden doing Now?</a></h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio placeat exercitationem magni voluptates dolore. Tenetur fugiat voluptates quas, nobis error deserunt aliquam temporibus sapiente, laudantium dolorum itaque libero eos deleniti?</p>
-                        <div class="d-flex align-items-center author">
-                            <div class="photo"><img src="~/Content/assets/img/person-2.jpg" alt="" class="img-fluid"></div>
-                            <div class="name">
-                                <h3 class="m-0 p-0">Wade Warren</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="d-md-flex post-entry-2 half">
-                    <a href="single-post.html" class="me-4 thumbnail">
-                        <img src="~/Content/assets/img/post-landscape-4.jpg" alt="" class="img-fluid">
-                    </a>
-                    <div>
-                        <div class="post-meta"><span class="date">Culture</span> <span class="mx-1">&bullet;</span> <span>Jul 5th '22</span></div>
-                        <h3><a href="single-post.html">What is the son of Football Coach John Gruden, Deuce Gruden doing Now?</a></h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio placeat exercitationem magni voluptates dolore. Tenetur fugiat voluptates quas, nobis error deserunt aliquam temporibus sapiente, laudantium dolorum itaque libero eos deleniti?</p>
-                        <div class="d-flex align-items-center author">
-                            <div class="photo"><img src="~/Content/assets/img/person-2.jpg" alt="" class="img-fluid"></div>
-                            <div class="name">
-                                <h3 class="m-0 p-0">Wade Warren</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="text-start py-4">
                     <div class="custom-pagination">
@@ -250,5 +192,5 @@
 
         </div>
     </div>
-</section>    
+</section>
 

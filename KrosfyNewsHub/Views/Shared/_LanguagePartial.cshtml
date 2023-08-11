@@ -1,0 +1,43 @@
+﻿@using KrosfyNewsHub.Extensions
+@{
+    var userAgent = HttpContext.Current.Request.UserAgent;
+}
+
+@if (!NewsExtensions.isRequestFromMobile(userAgent))
+{
+    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="bi bi-translate"></i> @Resources.Resources.LangText
+            </a>
+            <div class="dropdown-menu bg-light border-bottom border-bottom" aria-labelledby="navbarDropdown">
+                <a class="nav-link dropdown-item" href="@Url.Action("ChangeLanguage", "Language",new { lang = "es" })">
+                    <img width="20" height="20" src="https://img.icons8.com/color/48/spain-circular.png" alt="spain-circular" /> @Resources.Resources.LangES
+                </a>
+                <a class="nav-link dropdown-item" href="@Url.Action("ChangeLanguage", "Language",new { lang = "it" })">
+                    <img width="20" height="20" src="https://img.icons8.com/fluency/48/italy-circular.png" alt="italy-circular" /> @Resources.Resources.LangIT
+                </a>
+                <a class="nav-link dropdown-item" href="@Url.Action("ChangeLanguage", "Language",new { lang = "en" })">
+                    <img width="20" height="20" src="https://img.icons8.com/fluency/48/usa-circular.png" alt="usa-circular" style="display:inline-flex" /> @Resources.Resources.LangEN
+                </a>
+            </div>
+        </li>
+    </ul>
+}
+else
+{
+    <div style="display:flex;justify-content:center;">
+        <p class="nav-link" style="color: var(--bs-nav-link-color)">@Resources.Resources.LangText: </p>
+        <a class="nav-link img-mobile" href="@Url.Action("ChangeLanguage", "Language",new { lang = "es" })">
+            <img width="20" height="20" src="https://img.icons8.com/color/48/spain-circular.png" alt="spain-circular" />
+        </a>
+        <a class="nav-link img-mobile" href="@Url.Action("ChangeLanguage", "Language",new { lang = "it" })">
+            <img width="20" height="20" src="https://img.icons8.com/fluency/48/italy-circular.png" alt="italy-circular" />
+        </a>
+        <a class="nav-link img-mobile" href="@Url.Action("ChangeLanguage", "Language",new { lang = "en" })">
+            <img width="20" height="20" src="https://img.icons8.com/fluency/48/usa-circular.png" alt="usa-circular" style="display:inline-flex" />
+        </a>
+    </div>
+
+}
