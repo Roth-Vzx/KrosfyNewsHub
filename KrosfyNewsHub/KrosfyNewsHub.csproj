@@ -296,6 +296,7 @@
     <Content Include="Content\assets\vendor\php-email-form\validate.js" />
     <Content Include="Content\assets\vendor\swiper\swiper-bundle.min.css" />
     <Content Include="Content\assets\vendor\swiper\swiper-bundle.min.js" />
+    <Content Include="DLL\DBInterface.dll" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.bundle.js" />
