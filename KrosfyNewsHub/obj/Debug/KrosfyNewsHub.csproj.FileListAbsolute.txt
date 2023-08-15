@@ -298,3 +298,4 @@ C:\Users\alex\Source\Repos\KrosfyNewsHub\KrosfyNewsHub\bin\roslyn\System.Buffers
 C:\Users\alex\Source\Repos\KrosfyNewsHub\KrosfyNewsHub\bin\roslyn\System.Memory.dll
 C:\Users\alex\Source\Repos\KrosfyNewsHub\KrosfyNewsHub\bin\roslyn\System.Numerics.Vectors.dll
 C:\Users\alex\Source\Repos\KrosfyNewsHub\KrosfyNewsHub\bin\roslyn\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\alex\Source\Repos\KrosfyNewsHub\KrosfyNewsHub\bin\DBHelper.dll
