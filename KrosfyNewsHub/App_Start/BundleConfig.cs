@@ -36,6 +36,13 @@ namespace KrosfyNewsHub
                       "~/Content/assets/css/main.css"));
 
 
+            bundles.Add(new StyleBundle("~/Content/assets/vendor/bootstrap/css/bootstrap.min.css").Include(
+                      "~/Content/assets/vendor/bootstrap/css/bootstrap.min.css"));
+            bundles.Add(new StyleBundle("~/Content/assets/css/login.css").Include(
+                      "~/Content/assets/css/login.css"));
+            bundles.Add(new Bundle("~/Content/assets/vendor/bootstrap/js/bootstrap.bundle.min.js").Include(
+                        "~/Content/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"));
+
 
 
             //    // Use the development version of Modernizr to develop with and learn from. Then, when you're

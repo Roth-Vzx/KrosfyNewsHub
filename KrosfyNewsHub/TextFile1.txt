@@ -10,3 +10,8 @@ https://gnews.io/docs/v4#query-syntax   --- 10 peticiones por mes
 
 https://rapidapi.com/aryanchaurasia348-D-e9g9-G_m/api/news-article-data-extract-and-summarization2/pricing 9$ por mes, 20.000 peticiones / 1 por seg, para extrer datos de una noticia
 Esta se podria combinar con Newsapi.
+
+
+
+----------------- Secciones
+Forex
