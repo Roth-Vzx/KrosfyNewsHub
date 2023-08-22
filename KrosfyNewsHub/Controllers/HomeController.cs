@@ -67,7 +67,11 @@ namespace KrosfyNewsHub.Controllers
             foreach (var subcategoria in news.News) {
                 if(filterCategory != 0 && filterCategory != subcategoria.category) { continue; }
                 if (filterSubCategory != 0 && filterSubCategory != subcategoria.subcategory) { continue; }
+#pragma warning disable CS0219 // La variabile è assegnata, ma il suo valore non viene mai usato
+#pragma warning disable CS0219 // La variabile è assegnata, ma il suo valore non viene mai usato
                 string CategoryName = ""; string SubCategoryName = "";
+#pragma warning restore CS0219 // La variabile è assegnata, ma il suo valore non viene mai usato
+#pragma warning restore CS0219 // La variabile è assegnata, ma il suo valore non viene mai usato
                 List<Article> SubCategoryNews = filterIndex ? LastArticles(subcategoria.content.articles) : subcategoria.content.articles;
                 _AllNews.Add((SubCategoryNews, subcategoria.category, subcategoria.subcategory));
             }
