@@ -141,8 +141,17 @@
   <data name="Menu_Crypto" xml:space="preserve">
     <value>Crypto Currencies</value>
   </data>
+  <data name="Menu_Forex" xml:space="preserve">
+    <value>Forex</value>
+  </data>
+  <data name="Menu_Gaming" xml:space="preserve">
+    <value>Video Games</value>
+  </data>
   <data name="Menu_HomeBtn" xml:space="preserve">
     <value>Home</value>
+  </data>
+  <data name="Menu_IA" xml:space="preserve">
+    <value>Artificial Intelligence</value>
   </data>
   <data name="Menu_SearchText" xml:space="preserve">
     <value>Search</value>

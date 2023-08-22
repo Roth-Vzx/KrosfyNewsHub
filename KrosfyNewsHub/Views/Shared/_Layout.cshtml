@@ -1,5 +1,9 @@
-﻿@{
+﻿@using KrosfyNewsHub.Extensions
+@{
+
     var logoURL = Url.Content("~/assets/img/favicon.png");
+    string Err = "";
+    var Categorias = NewsExtensions.GetCategories_INT(ref Err);
 }
 
 
@@ -46,31 +50,26 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">@Html.ActionLink(Resources.Resources.Menu_HomeBtn, "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="CryptoDropdown" role="button"
-                               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Crypto @* <i class="bi bi-currency-bitcoin"></i>*@
-                            </a>
-                            <div class="dropdown-menu bg-light border-bottom border-bottom" aria-labelledby="CryptoDropdown">
-                                @Html.ActionLink(Resources.Resources.Menu_AllText, "Index", "Home", new { area = "", categoriaID = 1 }, new { @class = "nav-link dropdown-item" })
-                                @Html.ActionLink("Bitcoin", "Category", "Home", new { area = "", categoriaID = 1, SubCategoriaID = 1 }, new { @class = "nav-link dropdown-item" })
-                                @Html.ActionLink("Ethereum", "Category", "Home", new { area = "", categoriaID = 1, SubCategoriaID = 2 }, new { @class = "nav-link dropdown-item" })
-                                @Html.ActionLink("Tether", "Category", "Home", new { area = "", categoriaID = 1, SubCategoriaID = 3 }, new { @class = "nav-link dropdown-item" })
-                                @Html.ActionLink("Cardano", "Category", "Home", new { area = "", categoriaID = 1, SubCategoriaID = 4 }, new { @class = "nav-link dropdown-item" })
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="TechnologyDropdown" role="button"
-                               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                @Resources.Resources.Menu_Technology @* <i class="bi bi-currency-bitcoin"></i>*@
-                            </a>
-                            <div class="dropdown-menu bg-light border-bottom border-bottom" aria-labelledby="TechnologyDropdown">
-                                @Html.ActionLink(Resources.Resources.Menu_AllText, "Index", "Home", new { area = "", categoriaID = 2 }, new { @class = "nav-link dropdown-item" })
-                                @Html.ActionLink("Inteligencia Artificial", "Category", "Home", new { area = "", categoriaID = 2, SubCategoriaID = 5 }, new { @class = "nav-link dropdown-item" })
-                                @Html.ActionLink("Gaming News", "Category", "Home", new { area = "", categoriaID = 2, SubCategoriaID = 6 }, new { @class = "nav-link dropdown-item" })
+                        @foreach (var cat in Categorias)
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="Dropdown@(cat.ID)" role="button"
+                                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    @NewsExtensions.GetCategoryName(cat.ID)
+                                </a>
+                                <div class="dropdown-menu bg-light border-bottom border-bottom" aria-labelledby="@(cat.ID)">
+                                    @Html.ActionLink(Resources.Resources.Menu_AllText, "Index", "Home", new { area = "", categoriaID = cat.ID }, new { @class = "nav-link dropdown-item" })
+                                    @foreach (var subcategory in cat.subcategories)
+                                    {
+                                        @Html.ActionLink(NewsExtensions.GetSubCategoryName(subcategory.ID), "Category", "Home", new { area = "", categoriaID = cat.ID, SubCategoriaID = subcategory.ID }, new { @class = "nav-link dropdown-item" })
 
-                            </div>
-                        </li>
+                                    }
+                                </div>
+                            </li>
+                        }
+
+                        
+                        
                     </ul>
 
 

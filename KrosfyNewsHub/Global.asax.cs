@@ -22,13 +22,21 @@ namespace KrosfyNewsHub
 
         protected void Application_AcquireRequestState(object sender, EventArgs e)
         {
+            string acceptLanguageHeader = Request.Headers["Accept-Language"];
+            string preferredLanguage = acceptLanguageHeader?.Split(',').FirstOrDefault();
+            if (!string.IsNullOrEmpty(preferredLanguage) && preferredLanguage.Contains("-"))
+            {
+                preferredLanguage = preferredLanguage.Split('-')[0].ToLower();
+            }
+
+            preferredLanguage =  (preferredLanguage != "it" && preferredLanguage != "es") ? "en" : preferredLanguage;
+
             HttpContext context = HttpContext.Current;
-            var languageSession = "es";
             if (context != null && context.Session != null)
             {
-                languageSession = context.Session["lang"] != null ? context.Session["lang"].ToString() : "es";
+                preferredLanguage = context.Session["lang"] != null ? context.Session["lang"].ToString() : preferredLanguage;
             }
-            var cultureInfo = new CultureInfo(languageSession);
+            var cultureInfo = new CultureInfo(preferredLanguage);
             Thread.CurrentThread.CurrentCulture = cultureInfo;
             Thread.CurrentThread.CurrentUICulture = cultureInfo;
         }
