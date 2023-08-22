@@ -5,6 +5,11 @@ using System.Linq;
 using System.Web.Mvc;
 using KrosfyNewsHub.Extensions;
 using System.Text;
+using DBHelper;
+using System.Data.SqlClient;
+using System.Data;
+using System.Web.Helpers;
+using System;
 
 namespace KrosfyNewsHub.Controllers
 {
@@ -26,6 +31,34 @@ namespace KrosfyNewsHub.Controllers
 
         public void LoadData(bool filterIndex=false, int filterCategory = 0, int filterSubCategory = 0)
         {
+            //Ejemplo de llamada a la BD
+            using (DB DB = new DB())
+            {
+                if (DB.Open())
+                {
+                    string strSql = $"SELECT ID, NombreCategoria, ParentCategoryID " + Environment.NewLine +
+                                    $" FROM Category WITH (NOLOCK) ";
+
+                    DataSet ds = DB.Execute(strSql);
+                    if (ds == null)
+                    {
+                        throw DB.GetException();
+                    }
+                    DataTable dt = ds.Tables[0];
+                    if (dt.Rows.Count > 0)
+                    {
+
+                    }
+                    else { throw new Exception("Categorias no encontradas."); }
+                    ds = null;
+                    dt = null;
+                }
+                else
+                {
+                    throw DB.GetException();
+                }
+            }
+
             string rutaArchivoJson = Server.MapPath("~/Content/data/News.json");
             byte[] bytes = Encoding.UTF8.GetBytes(System.IO.File.ReadAllText(rutaArchivoJson));
             string contenidoJson = Encoding.UTF8.GetString(bytes);
