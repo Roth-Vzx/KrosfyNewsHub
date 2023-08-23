@@ -13,7 +13,7 @@
 
             <div class="col-lg-10">
                 <!-- Categoria -->
-                @foreach ((List<Article> articulos, int IDCategoria, int IDSubCategoria) categoria in ViewBag.News)
+                @foreach ((List<ArticleKrosfy> articulos, int IDCategoria, int IDSubCategoria) categoria in ViewBag.News)
                 {
                     <div class="row">
                         <div class="col-lg-12 section-header d-flex justify-content-between align-items-center mb-5">
@@ -21,11 +21,11 @@
                             <div>@Html.ActionLink($"{Resources.Resources.Home_SeeAllText} - {NewsExtensions.GetSubCategoryName(categoria.IDSubCategoria)}", "Category", "Home", new { area = "", categoriaID = categoria.IDCategoria, SubCategoriaID = categoria.IDSubCategoria }, new { @class = "more" })</div> <!-- Terminar-->
                         </div>
                         <div class="col-lg-5">
-                            @foreach (Article noticia in categoria.articulos.Take(2))
+                            @foreach (ArticleKrosfy noticia in categoria.articulos.Take(2))
                             {
                                 <div class="post-entry-1 lg">
                                     <a href="@Url.Action("SinglePost","Home", new { area = "", idPost = 0 })"><img src="@noticia.urlToImage" alt="" class="img-fluid"></a>
-                                    <div class="post-meta"><span>@noticia.author</span> <span class="mx-1">&bullet;</span>  <span>@noticia.publishedAt</span> <span class="mx-1">&bullet;</span><span class="date">@noticia.source.name</span> </div>
+                                    <div class="post-meta"><span>@noticia.author</span> <span class="mx-1">&bullet;</span>  <span>@noticia.publishedAt</span> <span class="mx-1">&bullet;</span><span class="date">@noticia.source</span> </div>
                                     <h2><a href="@Url.Action("SinglePost","Home", new { area = "", idPost = 0 })">@noticia.title</a></h2>
                                     <p class="mb-4 d-block">@noticia.description</p>
 
@@ -35,12 +35,12 @@
 
                         <div class="col-lg-7 border-start custom-border">
                             <div class="row g-5">
-                                @foreach (Article noticia in categoria.articulos.Skip(2).Take(6))
+                                @foreach (ArticleKrosfy noticia in categoria.articulos.Skip(2).Take(6))
                                 {
                                     <div class="col-lg-6 ">
                                         <div class="post-entry-1">
                                             <a href="@Url.Action("SinglePost","Home", new { area = "", idPost = 0 })"><img src="@noticia.urlToImage" alt="" class="img-fluid"></a>
-                                            <div class="post-meta"><span>@noticia.author</span> <span class="mx-1">&bullet;</span>  <span>@noticia.publishedAt</span> <span class="mx-1">&bullet;</span><span class="date">@noticia.source.name</span> </div>
+                                            <div class="post-meta"><span>@noticia.author</span> <span class="mx-1">&bullet;</span>  <span>@noticia.publishedAt</span> <span class="mx-1">&bullet;</span><span class="date">@noticia.source</span> </div>
                                             <h2><a href="@Url.Action("SinglePost","Home", new { area = "", idPost = 0 })">@noticia.title</a></h2>
                                         </div>
                                     </div>

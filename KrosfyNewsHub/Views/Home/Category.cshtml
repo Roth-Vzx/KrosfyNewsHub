@@ -12,9 +12,9 @@
 
             <div class="col-md-9" data-aos="fade-up">
                 <h3 class="category-title">@Resources.Resources.Category_TitleText: @ViewBag.Category -> @ViewBag.Subcategory </h3>
-                @foreach ((List<Article> articulos, int IDCategoria, int IDSubCategoria) categoria in ViewBag.News)
+                @foreach ((List<ArticleKrosfy> articulos, int IDCategoria, int IDSubCategoria) categoria in ViewBag.News)
                 {
-                    foreach (Article noticia in categoria.articulos.Take(100))
+                    foreach (ArticleKrosfy noticia in categoria.articulos.Take(100))
                     {
                         <div class="d-md-flex post-entry-2 half">
                             <a href="@Url.Action("SinglePost","Home", new { area = "", idPost = 0 })" class="me-4 thumbnail">

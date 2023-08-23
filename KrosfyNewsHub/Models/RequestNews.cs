@@ -38,9 +38,26 @@ namespace KrosfyNewsHub.Models
         public string publishedAt { get; set; }
         public string urlToImage { get; set; }
         public Source source { get; set; }
+
+    }
+
+    public class ArticleKrosfy
+    {
+        public string title { get; set; }
+        public string content { get; set; }
+        public string url { get; set; }
+        public string description { get; set; }
+        public string category { get; set; }
+        public string language { get; set; }
+        public string country { get; set; }
+        public string author { get; set; }
+        public string publishedAt { get; set; }
+        public string urlToImage { get; set; }
+        public string source { get; set; }
         public long id { get; set; }
 
-        public Article(string tit, string cont,string urlPage,string desc,string lang,string pais,string auth, string pubAt, string imgurl, string origin, long idTable)
+
+        public ArticleKrosfy(string tit, string cont, string urlPage, string desc, string lang, string pais, string auth, string pubAt, string imgurl, string origin, long idTable)
         {
             id = idTable;
             title = tit;
@@ -52,13 +69,11 @@ namespace KrosfyNewsHub.Models
             author = auth;
             publishedAt = pubAt;
             urlToImage = imgurl;
-            source = new Source(origin);
+            source = origin;
 
         }
-        
+
     }
-
-
 
     public class Source
     {
@@ -67,6 +82,10 @@ namespace KrosfyNewsHub.Models
         public Source(string nombre)
         {
             name = nombre;
+        }
+        public Source()
+        {
+            
         }
     }
     #endregion

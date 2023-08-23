@@ -16,7 +16,7 @@ namespace KrosfyNewsHub.Controllers
 {
     public class HomeController : Controller
     {
-        List<(List<Article> articulos, int CategoriaID, int SubCategoriaID)> _AllNews = new List<(List<Article> articulos, int CategoriaID, int SubCategoriaID)>();
+        List<(List<ArticleKrosfy> articulos, int CategoriaID, int SubCategoriaID)> _AllNews = new List<(List<ArticleKrosfy> articulos, int CategoriaID, int SubCategoriaID)>();
 
         public ActionResult Index(int categoriaID = 0)
         {
@@ -65,7 +65,7 @@ namespace KrosfyNewsHub.Controllers
 
                                 DataTableReader dr = ds.CreateDataReader();
                                 ds = null;
-                                List<Article> list = new List<Article>();
+                                List<ArticleKrosfy> list = new List<ArticleKrosfy>();
                                 while (dr.Read())
                                 {
                                     string tit = "", cont = "", urlPage = "", desc = "", language = "", pais = "", auth = "", pubAt = "", imgurl = "", origin = "";
@@ -82,7 +82,7 @@ namespace KrosfyNewsHub.Controllers
                                     pubAt = (Convert.ToDateTime(dr["PublishedAt"])).ToString("dd-MM-yyyy");
                                     origin = dr["Source"].ToString();
 
-                                    Article noticia = new Article(tit,cont,urlPage, desc, language, pais, auth, pubAt, imgurl, origin, id);
+                                    ArticleKrosfy noticia = new ArticleKrosfy(tit,cont,urlPage, desc, language, pais, auth, pubAt, imgurl, origin, id);
                                     list.Add(noticia);
                                 }
                                 if(list.Count > 0)
