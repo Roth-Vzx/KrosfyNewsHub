@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.6.33723.286
+# Visual Studio 15
+VisualStudioVersion = 15.0.33801.198
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KrosfyNewsHub", "KrosfyNewsHub\KrosfyNewsHub.csproj", "{E326B707-C69A-42E5-8387-038B022B2121}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KrosfyNewsHub", "KrosfyNewsHub.csproj", "{E326B707-C69A-42E5-8387-038B022B2121}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,6 +20,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {17D6B89E-82DE-4A89-9236-CA89C1135FF7}
+		SolutionGuid = {9212BD06-3C1C-426E-8AC4-6CF6E411F03A}
 	EndGlobalSection
 EndGlobal
