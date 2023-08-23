@@ -40,9 +40,9 @@ namespace KrosfyNewsHub.Extensions
                 case 7: SubCategoryName = "Cardano"; break;
                 case 8: SubCategoryName = Resources.Resources.Menu_IA; break;
                 case 9: SubCategoryName = Resources.Resources.Menu_Gaming; break;
-                case 10: SubCategoryName = "USD/EUR"; break;
-                default:
-                    break;
+                case 10: SubCategoryName = "USD"; break;
+                case 11: SubCategoryName = "EUR"; break;
+                default: SubCategoryName = ""; break;
             }
             return SubCategoryName;
 

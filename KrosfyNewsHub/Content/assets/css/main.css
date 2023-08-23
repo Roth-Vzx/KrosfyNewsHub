@@ -1309,3 +1309,13 @@ section {
     max-height: 50px;
     margin-right: 6px;
 }
+
+.research-field {
+    min-width:500px;
+}
+
+@media (max-width: 768px) {
+    .research-field {
+        min-width: 200px;
+    }
+}

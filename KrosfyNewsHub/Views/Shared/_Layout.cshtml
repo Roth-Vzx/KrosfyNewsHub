@@ -18,9 +18,8 @@
     <meta content="" name="keywords">
 
     <!--  favicons -->
-    <link href="~/assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
+    <link href="~/Content/assets/img/logo-kn.png" rel="icon">
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,45 +39,44 @@
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
+                @*logo*@
                 <a class="navbar-brand" href="@Url.Action("Index", "Home")">
                     <img src="~/Content/assets/img/logo-kn.png" alt="logo" width="90">
                 </a>
+                @*boton mobile*@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse text-center" id="navbarTogglerDemo01">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">@Html.ActionLink(Resources.Resources.Menu_HomeBtn, "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-
+                        @*opciones del menu*@
                         @foreach (var cat in Categorias)
                         {
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="Dropdown@(cat.ID)" role="button"
-                                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    @NewsExtensions.GetCategoryName(cat.ID)
-                                </a>
-                                <div class="dropdown-menu bg-light border-bottom border-bottom" aria-labelledby="@(cat.ID)">
-                                    @Html.ActionLink(Resources.Resources.Menu_AllText, "Index", "Home", new { area = "", categoriaID = cat.ID }, new { @class = "nav-link dropdown-item" })
-                                    @foreach (var subcategory in cat.subcategories)
-                                    {
-                                        @Html.ActionLink(NewsExtensions.GetSubCategoryName(subcategory.ID), "Category", "Home", new { area = "", categoriaID = cat.ID, SubCategoriaID = subcategory.ID }, new { @class = "nav-link dropdown-item" })
-
-                                    }
-                                </div>
-                            </li>
+                           <li class="nav-item dropdown">
+                             <a class="nav-link dropdown-toggle" href="#" id="Dropdown@(cat.ID)" role="button"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @NewsExtensions.GetCategoryName(cat.ID)
+                             </a>
+                             <div class="dropdown-menu bg-light border-bottom border-bottom" aria-labelledby="@(cat.ID)">
+                                @Html.ActionLink(Resources.Resources.Menu_AllText, "Index", "Home", new { area = "", categoriaID = cat.ID }, new { @class = "nav-link dropdown-item justify-content-center d-flex" })
+                                @foreach (var subcategory in cat.subcategories)
+                                {
+                                  @Html.ActionLink(NewsExtensions.GetSubCategoryName(subcategory.ID), "Category", "Home", new { area = "", categoriaID = cat.ID, SubCategoriaID = subcategory.ID }, new { @class = "nav-link dropdown-item justify-content-center d-flex" })
+                                }
+                             </div>
+                           </li>
                         }
-
-                        
-                        
                     </ul>
 
-
-                    <div style="min-width:500px;">
+                    @*Barra de busqueda*@ 
+                    <div class="research-field">
                         <form class="d-flex" role="search" style="float:right; width:100%;">
                             <input class="form-control me-2" type="search" placeholder="@Resources.Resources.Menu_SearchText" aria-label="Search">
                             <a class="btn btn-outline-dark" href="@Url.Action("SearchResult","Home", new { area = "", type = "cardano" })"><i class="bi bi-search"></i></a>
                         </form>
                     </div>
+
                     @* Submenu de lenguaje.*@
                     @Html.Partial("_LanguagePartial")
 
