@@ -6,6 +6,7 @@ using System.Web;
 using static KrosfyNewsHub.Service;
 using DBHelper;
 using System.Reflection;
+using System.EnterpriseServices;
 
 namespace KrosfyNewsHub.Extensions
 {
@@ -62,6 +63,7 @@ namespace KrosfyNewsHub.Extensions
 
         }
 
+        #region funciones internas
         public static List<Categories> GetCategories_INT(ref string Err)
         {
             try
@@ -123,6 +125,47 @@ namespace KrosfyNewsHub.Extensions
 
             }
         }
+
+        public static bool InsertNew_INT(string tit, string desc, string content, string url, string img, string auth, string source, string lang, string country, string publiAt, int catID, int subcatID, bool isTreding, ref string Err) 
+        {
+            try
+            {
+                using (DB DB = new DB())
+                {
+                    if (DB.Open())
+                    {
+                        string SqlCheck = $"SELECT * FROM News Where Url = '{url}'";
+                        DataSet ds = DB.Execute(SqlCheck);
+                        DataTableReader dr = ds.CreateDataReader();
+                        bool ExistNotice = dr.HasRows;
+                        ds = null;
+                        dr = null;
+
+                        if (!ExistNotice)
+                        {
+                            string SqlInsert = $"INSERT INTO News (Title,contenido,Description,Url,ImageUrl,Author,Source,Language,Country, PublishedAt,CategoryID,SubCategoryID )" +
+                                         $" VALUES         ('{tit.q()}','{content.q()}','{desc.q()}','{url}','{img}','{auth.q()}','{source.q()}','{lang}','{country}','{publiAt}',{catID},{subcatID} )";
+
+                            DB.ExecuteScalar(SqlInsert);
+                        }
+                        return true;
+                       
+                    }
+                    else
+                    {
+                        throw DB.GetException();
+                    }
+
+                }    
+                return true;
+            }
+            catch (Exception ex )
+            {
+                Err = $"{NombreFuncion()} Error : {ex.Message}";
+                return false;
+            }
+        }
+        #endregion
 
         static string NombreFuncion() { return MethodBase.GetCurrentMethod().Name; }
 

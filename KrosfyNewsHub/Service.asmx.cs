@@ -39,6 +39,32 @@ namespace KrosfyNewsHub
             public int ID = 0;
             public string searchText = "";
         }
+
+
+        #endregion
+
+        #region Classi Newsomatic
+        public class Article
+        {
+            public string title { get; set; }
+            public string content { get; set; }
+            public string url { get; set; }
+            public string description { get; set; }
+            public string category { get; set; }
+            public string language { get; set; }
+            public string country { get; set; }
+            public string author { get; set; }
+            public string publishedAt { get; set; }
+            public string urlToImage { get; set; }
+            public Source source { get; set; }
+        }
+        
+        
+
+        public class Source
+        {
+            public string name { get; set; }
+        }
         #endregion
 
         #region variables internas
@@ -49,11 +75,7 @@ namespace KrosfyNewsHub
         // Meteremos a disposicion api's que permiten enviar las ultimas noticias del dia
         // Una api que se encarga de gestionar o mandar email a los usuarios subscritos
         // Un api que registra un usuario en el portal - para darle acceso al administrador
-        [WebMethod]
-        public string HelloWorld()
-        {
-            return "Hello World";
-        }
+        
 
         [WebMethod]
         public bool GetCategories(string token, ref List<Categories> categories, ref string Err)
@@ -75,7 +97,32 @@ namespace KrosfyNewsHub
             
         }
 
-        
+        [WebMethod]
+        public bool InsertNews(string token, List<Article> noticias, int catID, int subcatID, ref string Err)
+        {
+            Err = "";
+            try
+            {
+                if (token != tokenInt) { throw new UnauthorizedAccessException(); }
+
+                foreach (var noti in noticias)
+                {
+                    NewsExtensions.InsertNew_INT(noti.title,noti.description, noti.content, noti.url, noti.urlToImage, noti.author, noti.source.name, noti.language, noti.country, noti.publishedAt, catID, subcatID, false, ref Err);
+                }
+
+                if (!string.IsNullOrEmpty(Err)) { throw new Exception(Err); }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Err = $"{NombreFuncion()} Error : {ex.Message}";
+                return false;
+            }
+
+        }
+
+
         static string NombreFuncion(){ return  MethodBase.GetCurrentMethod().Name; }
 
 
