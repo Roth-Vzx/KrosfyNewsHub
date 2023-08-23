@@ -21,7 +21,7 @@
                                 <img src="@noticia.urlToImage" alt="" class="img-fluid">
                             </a>
                             <div>
-                                <div class="post-meta"><span class="date">@ViewBag.Subcategory</span> <span class="mx-1">&bullet;</span> <span>@noticia.publishedAt.ToString("dd-MM-yyyy")</span></div>
+                                <div class="post-meta"><span class="date">@ViewBag.Subcategory</span> <span class="mx-1">&bullet;</span> <span>@noticia.publishedAt</span></div>
                                 <h3><a href="@Url.Action("SinglePost","Home", new { area = "", idPost = 0 })">@noticia.title</a></h3>
                                 <p>@noticia.description</p>
                                 <div class="d-flex align-items-center author">

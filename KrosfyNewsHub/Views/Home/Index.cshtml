@@ -25,7 +25,7 @@
                             {
                                 <div class="post-entry-1 lg">
                                     <a href="@Url.Action("SinglePost","Home", new { area = "", idPost = 0 })"><img src="@noticia.urlToImage" alt="" class="img-fluid"></a>
-                                    <div class="post-meta"><span>@noticia.author</span> <span class="mx-1">&bullet;</span>  <span>@noticia.publishedAt.ToString("dd-MM-yyyy")</span> <span class="mx-1">&bullet;</span><span class="date">@noticia.source.name</span> </div>
+                                    <div class="post-meta"><span>@noticia.author</span> <span class="mx-1">&bullet;</span>  <span>@noticia.publishedAt</span> <span class="mx-1">&bullet;</span><span class="date">@noticia.source.name</span> </div>
                                     <h2><a href="@Url.Action("SinglePost","Home", new { area = "", idPost = 0 })">@noticia.title</a></h2>
                                     <p class="mb-4 d-block">@noticia.description</p>
 
@@ -40,7 +40,7 @@
                                     <div class="col-lg-6 ">
                                         <div class="post-entry-1">
                                             <a href="@Url.Action("SinglePost","Home", new { area = "", idPost = 0 })"><img src="@noticia.urlToImage" alt="" class="img-fluid"></a>
-                                            <div class="post-meta"><span>@noticia.author</span> <span class="mx-1">&bullet;</span>  <span>@noticia.publishedAt.ToString("dd-MM-yyyy")</span> <span class="mx-1">&bullet;</span><span class="date">@noticia.source.name</span> </div>
+                                            <div class="post-meta"><span>@noticia.author</span> <span class="mx-1">&bullet;</span>  <span>@noticia.publishedAt</span> <span class="mx-1">&bullet;</span><span class="date">@noticia.source.name</span> </div>
                                             <h2><a href="@Url.Action("SinglePost","Home", new { area = "", idPost = 0 })">@noticia.title</a></h2>
                                         </div>
                                     </div>

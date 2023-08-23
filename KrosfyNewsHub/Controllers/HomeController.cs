@@ -10,6 +10,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Web.Helpers;
 using System;
+using System.Web;
 
 namespace KrosfyNewsHub.Controllers
 {
@@ -19,54 +20,98 @@ namespace KrosfyNewsHub.Controllers
 
         public ActionResult Index(int categoriaID = 0)
         {
-            LoadData(true, categoriaID);
+            string lang = NewsExtensions.GetLanguage();
+            LoadData(lang, true, categoriaID);
             ViewBag.News = _AllNews;
             return View();
         }
 
 
-        public void LoadData(bool filterIndex=false, int filterCategory = 0, int filterSubCategory = 0)
+        public void LoadData(string lang, bool fromIndex=false, int filterCategory = 0, int filterSubCategory = 0)
         {
-            //Ejemplo de llamada a la BD
-            using (DB DB = new DB())
+            try
             {
-                if (DB.Open())
+                using (DB DB = new DB())
                 {
-                    string strSql = $"SELECT ID, NombreCategoria, ParentCategoryID " + Environment.NewLine +
-                                    $" FROM Category WITH (NOLOCK) ";
+                    if (DB.Open())
+                    {
+                        string err = "";
+                        var Categorias = NewsExtensions.GetCategories_INT(ref err);
+                        if (filterCategory != 0) //Si estoy filtrando una categoria 
+                        {
+                            Categorias = Categorias.Where(x => x.ID == filterCategory).ToList();
+                        }
 
-                    DataSet ds = DB.Execute(strSql);
-                    if (ds == null)
+                        if (filterSubCategory != 0) // Si estoy filtrando una subcategoria
+                        {
+                            foreach (var Categoria in Categorias)
+                            {
+                                Categoria.subcategories = Categoria.subcategories.Where(x => x.ID == filterSubCategory).ToList();
+                            }
+                        }
+
+                        foreach (var cat in Categorias)
+                        {
+                            foreach (var subcat in cat.subcategories)
+                            {
+                                string takesql = fromIndex ? " TOP (8) " : "";
+                                string strSql = $" SELECT {takesql} * " + Environment.NewLine +
+                                                $" FROM News WITH (NOLOCK) " + Environment.NewLine +
+                                                $" WHERE Language='{lang}' AND IsPublished = 1 AND CategoryID ={cat.ID} AND SubCategoryID = {subcat.ID}" + Environment.NewLine +
+                                                $" ORDER BY PublishedAt DESC";
+
+                                DataSet ds = DB.Execute(strSql);
+                                if (ds == null) { throw DB.GetException(); }
+
+                                DataTableReader dr = ds.CreateDataReader();
+                                ds = null;
+                                List<Article> list = new List<Article>();
+                                while (dr.Read())
+                                {
+                                    string tit = "", cont = "", urlPage = "", desc = "", language = "", pais = "", auth = "", pubAt = "", imgurl = "", origin = "";
+                                    
+                                    long id = Convert.ToInt64(dr["ID"]);
+                                    tit = dr["Title"].ToString();
+                                    cont = dr["contenido"].ToString();
+                                    urlPage = dr["Url"].ToString();
+                                    imgurl = dr["ImageUrl"].ToString();
+                                    desc = dr["Description"].ToString();
+                                    language = dr["Language"].ToString();
+                                    pais = dr["Country"].ToString();
+                                    auth = dr["Author"].ToString();
+                                    pubAt = (Convert.ToDateTime(dr["PublishedAt"])).ToString("dd-MM-yyyy");
+                                    origin = dr["Source"].ToString();
+
+                                    Article noticia = new Article(tit,cont,urlPage, desc, language, pais, auth, pubAt, imgurl, origin, id);
+                                    list.Add(noticia);
+                                }
+                                if(list.Count > 0)
+                                {
+                                    _AllNews.Add((list, cat.ID, subcat.ID));
+                                }
+                            }
+                        }
+                    }
+                    else
                     {
                         throw DB.GetException();
                     }
-                    DataTable dt = ds.Tables[0];
-                    if (dt.Rows.Count > 0)
-                    {
+                }
 
-                    }
-                    else { throw new Exception("Categorias no encontradas."); }
-                    ds = null;
-                    dt = null;
-                }
-                else
-                {
-                    throw DB.GetException();
-                }
             }
+            catch (Exception ex)
+            {
 
-            string rutaArchivoJson = Server.MapPath("~/Content/data/News.json");
-            byte[] bytes = Encoding.UTF8.GetBytes(System.IO.File.ReadAllText(rutaArchivoJson));
-            string contenidoJson = Encoding.UTF8.GetString(bytes);
-            var news = JsonConvert.DeserializeObject<RequestNews>(contenidoJson);
+            }
+            //Ejemplo de llamada a la BD
             
-            foreach (var subcategoria in news.News) {
-                if(filterCategory != 0 && filterCategory != subcategoria.category) { continue; }
-                if (filterSubCategory != 0 && filterSubCategory != subcategoria.subcategory) { continue; }
-                string CategoryName = ""; string SubCategoryName = "";
-                List<Article> SubCategoryNews = filterIndex ? LastArticles(subcategoria.content.articles) : subcategoria.content.articles;
-                _AllNews.Add((SubCategoryNews, subcategoria.category, subcategoria.subcategory));
-            }
+            
+            //foreach (var subcategoria in news.News) {
+            //    if(filterCategory != 0 && filterCategory != subcategoria.category) { continue; }
+            //    if (filterSubCategory != 0 && filterSubCategory != subcategoria.subcategory) { continue; }
+            //    List<Article> SubCategoryNews = filterIndex ? LastArticles(subcategoria.content.articles) : subcategoria.content.articles;
+            //    _AllNews.Add((SubCategoryNews, subcategoria.category, subcategoria.subcategory));
+            //}
            
         }
 
@@ -89,8 +134,8 @@ namespace KrosfyNewsHub.Controllers
 
         public ActionResult Category(int categoriaID, int SubCategoriaID)
         {
-            
-            LoadData(false,0, SubCategoriaID); 
+            string lang = NewsExtensions.GetLanguage();
+            LoadData(lang,false,0, SubCategoriaID); 
             ViewBag.Category = NewsExtensions.GetCategoryName(categoriaID).ToUpper();
             ViewBag.Subcategory = NewsExtensions.GetSubCategoryName(SubCategoriaID).ToUpper();
             ViewBag.News = _AllNews;

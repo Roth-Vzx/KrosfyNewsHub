@@ -7,6 +7,8 @@ using static KrosfyNewsHub.Service;
 using DBHelper;
 using System.Reflection;
 using System.EnterpriseServices;
+using System.Threading;
+using KrosfyNewsHub.Models;
 
 namespace KrosfyNewsHub.Extensions
 {
@@ -167,7 +169,8 @@ namespace KrosfyNewsHub.Extensions
         }
         #endregion
 
-        static string NombreFuncion() { return MethodBase.GetCurrentMethod().Name; }
+        private static string NombreFuncion() { return MethodBase.GetCurrentMethod().Name; }
 
+        public static string GetLanguage() { return Thread.CurrentThread.CurrentCulture.Name; }
     }
 }

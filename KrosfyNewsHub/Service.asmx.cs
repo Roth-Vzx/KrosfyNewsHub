@@ -12,6 +12,7 @@ using System.Web.UI.WebControls;
 using DBHelper;
 using System.Data;
 using KrosfyNewsHub.Extensions;
+using KrosfyNewsHub.Models;
 
 namespace KrosfyNewsHub
 {
@@ -25,52 +26,10 @@ namespace KrosfyNewsHub
     // [System.Web.Script.Services.ScriptService]
     public class Service : WebService
     {
-        #region clases internas
-        public class Categories
-        {
-            public string name = "";
-            public int ID = 0;
-            public List<Subcategory> subcategories = new List<Subcategory>();
-        }
-
-        public class Subcategory
-        {
-            public string name = "";
-            public int ID = 0;
-            public string searchText = "";
-        }
-
-
-        #endregion
-
-        #region Classi Newsomatic
-        public class Article
-        {
-            public string title { get; set; }
-            public string content { get; set; }
-            public string url { get; set; }
-            public string description { get; set; }
-            public string category { get; set; }
-            public string language { get; set; }
-            public string country { get; set; }
-            public string author { get; set; }
-            public string publishedAt { get; set; }
-            public string urlToImage { get; set; }
-            public Source source { get; set; }
-        }
         
-        
-
-        public class Source
-        {
-            public string name { get; set; }
-        }
-        #endregion
-
         #region variables internas
         string tokenInt = "KrosfyNH2023$.AR";
         #endregion
-
 
         // Meteremos a disposicion api's que permiten enviar las ultimas noticias del dia
         // Una api que se encarga de gestionar o mandar email a los usuarios subscritos

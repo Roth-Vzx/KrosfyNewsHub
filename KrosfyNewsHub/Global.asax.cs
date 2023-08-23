@@ -18,6 +18,7 @@ namespace KrosfyNewsHub
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
         }
 
         protected void Application_AcquireRequestState(object sender, EventArgs e)
@@ -30,7 +31,7 @@ namespace KrosfyNewsHub
             }
 
             preferredLanguage =  (preferredLanguage != "it" && preferredLanguage != "es") ? "en" : preferredLanguage;
-
+            
             HttpContext context = HttpContext.Current;
             if (context != null && context.Session != null)
             {
