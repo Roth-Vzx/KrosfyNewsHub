@@ -324,6 +324,6 @@ C:\Users\alex\source\repos\KrosfyNewsHub\bin\roslyn\vbc.rsp
 C:\Users\alex\source\repos\KrosfyNewsHub\bin\roslyn\VBCSCompiler.exe
 C:\Users\alex\source\repos\KrosfyNewsHub\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\alex\source\repos\KrosfyNewsHub\bin\DBHelper.dll
-C:\Users\alex\source\repos\KrosfyNewsHub\obj\Debug\KrosfyNewsHub.csprojAssemblyReference.cache
 C:\Users\alex\source\repos\KrosfyNewsHub\obj\Debug\KrosfyNewsHub.csproj.CoreCompileInputs.cache
 C:\Users\alex\source\repos\KrosfyNewsHub\obj\Debug\KrosfyNewsHub.csproj.CopyComplete
+C:\Users\alex\source\repos\KrosfyNewsHub\obj\Debug\KrosfyNewsHub.csproj.AssemblyReference.cache
