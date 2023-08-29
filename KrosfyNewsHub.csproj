@@ -343,6 +343,7 @@
     <Content Include="Content\assets\vendor\bootstrap\js\bootstrap.min.js.map" />
     <Content Include="Content\assets\vendor\swiper\swiper-bundle.min.js.map" />
     <Content Include="bin\KrosfyNewsHub.dll.config" />
+    <None Include="Properties\PublishProfiles\FTPProfile.pubxml" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
